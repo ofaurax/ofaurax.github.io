@@ -37,7 +37,7 @@ https://community.zoom.com/t5/Meetings/Wayland-screen-sharing-broken-with-GNOME-
 
 I manage to have it work in Chromium with:
 ```
-systemctl --user start pipewire.service 
+systemctl --user start pipewire.service
 ```
 
 Replace `start` by `enable` so that's it's launched at startup
