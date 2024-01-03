@@ -30,7 +30,7 @@ https://unix.stackexchange.com/questions/6533/is-there-an-easy-way-to-update-inf
 * ack
 * rg (ripgrep)
 
-## Making zoom scren share work
+## Making zoom screen share work
 
 Following
 https://community.zoom.com/t5/Meetings/Wayland-screen-sharing-broken-with-GNOME-41-on-Fedora-35/m-p/67283/highlight/true/page/11
@@ -41,4 +41,26 @@ systemctl --user start pipewire.service
 ```
 
 Replace `start` by `enable` so that's it's launched at startup
+
+NB: I didn't manage to make it work with Firefox/Gnome using the
+native window picker, only with Chromium
+
+## Restrict Firefox memory usage using cgroups
+
+1. Open a root shell in /sys/fs/cgroup
+2. Create `firefox` (or any name) directory. The directory is
+   populated with special files
+3. Restrict memory.high to 8GB: `echo '8000000000' > memory.high`
+4. Restrict memory.max to 9GB: `echo '9000000000' > memory.max`
+5. Add firefox processes in this cgroup: `for p in $(pgrep -f firefox); do echo $p > cgroup.procs ; done`
+
+The difference between `high` and `max` is: when reaching `high`, the
+processes are not responding to input (seem frozen but continue to
+process), and when reaching `max`, it starts to kill processes.
+
+
+## git shortlog
+
+Get a list of commit messages betwwen 2 commits, ordered by author:
+`git shortlog [COMMIT1]..[COMMIT2]`
 
