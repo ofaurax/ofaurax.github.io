@@ -61,6 +61,27 @@ process), and when reaching `max`, it starts to kill processes.
 
 ## git shortlog
 
-Get a list of commit messages betwwen 2 commits, ordered by author:
+Get a list of commit messages between 2 commits, ordered by author:
 `git shortlog [COMMIT1]..[COMMIT2]`
+
+## Go: use a local dir as dependency
+
+If you have this:
+```
+github.com/bmc-toolbox/bmclib/v2 v2.2.0
+```
+
+Add this at then end of go.mod:
+```
+replace github.com/bmc-toolbox/bmclib/v2 v2.2.0 => ../bmclib
+```
+
+## dbus basics
+
+Get the list of *services*: `busctl`
+
+Get the *object* tree of a *service*: `busctl com.service.ServiceName`
+
+Get *methods/interfaces* of an *object*: `busctl introspect
+com.service.ServiceName /com/service/object_name`
 
