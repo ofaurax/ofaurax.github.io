@@ -85,3 +85,10 @@ Get the *object* tree of a *service*: `busctl com.service.ServiceName`
 Get *methods/interfaces* of an *object*: `busctl introspect
 com.service.ServiceName /com/service/object_name`
 
+## Emacs: search replace with newline
+
+For example, you want to replace `<br>` or `\n` with a real newline in
+a buffer.
+
+Make search and replace, then `\n` then `C-q` `C-j` (quoted-insert,
+newline)
