@@ -92,3 +92,5 @@ a buffer.
 
 Make search and replace, then `\n` then `C-q` `C-j` (quoted-insert,
 newline)
+
+## next tip
