@@ -1,0 +1,4 @@
+baseURL = 'https://ofaurax.github.io/'
+languageCode = 'fr-fr'
+title = "Notes d'Olivier"
+theme = 'notes'
