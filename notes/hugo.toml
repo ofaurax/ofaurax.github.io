@@ -2,3 +2,16 @@ baseURL = 'https://ofaurax.github.io/'
 languageCode = 'fr-fr'
 title = "Notes d'Olivier"
 theme = 'notes'
+
+# works with .md but doesn't with org-mode
+# enableEmoji = true
+
+#[module]
+## Needed if several mounts
+#  [[module.mounts]]
+#    target = 'content'
+#    source = 'content'
+## Add content from Orgzly Revived if enabled
+#  [[module.mounts]]
+#    target = 'content'
+#    source = '../../Applications/Orgzly Revived/pages/notes/content/'
