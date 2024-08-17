@@ -1,0 +1,20 @@
+#+TITLE: Bienvenue sur mes notes
+
+* Bienvenue sur mes notes !
+
+Je veux construire ici un ensemble de contenus et
+l'enrichir au fur et à mesure des années.
+Je lis beaucoup de choses, j'en retiens trop peu, et je perds souvent
+les réflexions que j'en fais.
+Ce sera peut-être aussi l'occasion de voir ma pensée évoluer, un peu
+comme quand on relit un journal de bord.
+
+Je lis souvent des pages web intéressantes de petits sites web personnels,
+et j'ai eu envie de contribuer à ça aussi.
+J'espère que le contenu pourra divertir, vous faire réfléchir
+ou servir à quelqu'un qui tombera ici par hasard.
+
+Si vous ne savez pas où aller ensuite,
+voici quelques liens de démarrage :
+- [[sorties][Sorties en famille]]
+
