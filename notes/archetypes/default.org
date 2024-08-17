@@ -1,0 +1,4 @@
+#+TITLE: {{ replace .File.ContentBaseName "_" " " | title }}
+#+DATE: {{ .Date }}
+#+DRAFT: true
+
