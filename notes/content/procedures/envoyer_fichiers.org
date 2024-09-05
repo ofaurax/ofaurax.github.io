@@ -1,0 +1,76 @@
+#+TITLE: Envoyer des fichiers et des images
+#+DATE: 2024-08-21T12:18:18+02:00
+
+Vous arrivez sur cette page probablement parce qu'il vous faut m'envoyer
+des fichiers, probablement photos et videos, en conservant la qualité
+d'origine.
+
+* Synthèse rapide
+
+Pour m'envoyer des fichiers, n'utilise pas WeTransfer
+mais https://www.grosfichiers.com/
+ou https://fromsmash.com/fr
+
+* Messageries: Whatsapp, Telegram, Messenger
+
+Peut-être que vous vous dites que par Whatsapp c'est suffisant, ou que
+je peux les récupérer sur Facebook s'il y a besoin, mais
+*non, parce que ces services conservent une version allégée/dégradée*
+juste suffisante pour l'afficher sur un écran de téléphone.
+
+Ce qui fait que ces versions amoindries ne seront pas utilisables pour
+imprimer un album souvenir, ou faire un vrai montage vidéo.
+
+* WeTransfer: oui, mais non.
+
+WeTransfer a été le 1er service à populariser le partage de gros
+fichiers, en hébergeant vos fichiers pour d'abord 30 jours, puis 14,
+puis 7 jours, et maintenant 3 jours par défaut (extensible à 7 dans
+les options).
+
+Le problème, c'est que *3 jours c'est court*.
+
+J'écris cet article au mois d'août.
+Imaginez quelqu'un qui part en vacances, et vous lui envoyez
+maintenant un lien WeTransfer: il n'est pas chez lui jusqu'à la semaine
+prochaine, comment est-ce qu'il doit faire ?
+
+Pour être honnête, j'ai toujours eu du mal avec les expirations de
+contenu, même quand la limite était à 14 jours.
+Vous recevez un mail que vous voyez le lendemain, il faut avoir le bon
+stockage sous la main au moment où vous voyez le mail, etc.
+
+Il y a aussi d'autres considérations : les données WeTransfer sont
+stockées aux US, ce qui a un impact sur la souveraineté et sur les
+performances de transfert.
+
+* Les alternatives
+
+** Smash
+
+https://fromsmash.com/fr
+
+Par défaut, le transfert expire en 7 jours (extensible à 14 dans les
+paramètres), ce qui est déjà plus pratique.
+
+Les données sont stockées en France, ce qui est conforme RGPD.
+
+Il y a aussi une application mobile qui permet d'envoyer un fichier
+directement depuis un téléphone.
+
+Ils ont une page de comparaison avec WeTransfer :
+https://fromsmash.com/fr/wetransfer
+
+
+** GrosFichiers
+
+https://www.grosfichiers.com/
+
+Il est hébergé en Suisse et en France, la limite est à 10Go,
+et, par défaut, il stocke 14 jours.
+
+Une chose agréable, il fournit une URL de *gestion* du transfert sans
+création de compte, donc pas besoin d'aller chercher dans ses mails
+une fois un partage créé, tout est dispo dans le navigateur (et pas
+besoin de donner une adresse e-mail valide).
+
