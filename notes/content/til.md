@@ -1,3 +1,8 @@
++++
+title = 'TIL: Today I Learned'
+date = 2024-09-05T12:05:00+02:00
++++
+
 # TIL: Today I Learned
 
 Inspired by https://github.com/jbranchaud/til
