@@ -48,7 +48,7 @@ performances de transfert.
 
 ** Smash
 
-https://fromsmash.com/fr
+Smash: https://fromsmash.com/fr
 
 Par défaut, le transfert expire en 7 jours (extensible à 14 dans les
 paramètres), ce qui est déjà plus pratique.
