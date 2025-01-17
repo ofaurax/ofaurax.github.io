@@ -1,0 +1,206 @@
+#+TITLE: Migration Wordpress
+#+DATE: 2025-01-16T09:20:25+01:00
+
+Ce document explique comment déplacer une installation de Wordpress
+d'un hébergement à un autre.
+Je vais utiliser la terminologie suivante : je vais parler de migrer
+un *site* depuis un hébergement *source* vers un hébergement *cible*.
+
+Pour l'example, je considère qu'on change de nom de domaine pour
+partir de =ancien.fr= à =nouveau.fr=.
+
+* Un site Wordpress = fichiers + base de données
+
+Un site wordpress, c'est un ensemble de fichiers stockés dans un
+dossier particulier d'un serveur (ex: =www=) ,ainsi qu'une base de
+données qui contient le texte des articles et toutes les métadonnées
+(catégories, date de publication, etc.).
+
+La plupart du temps, les fichiers du site et la base de données sont
+sur 2 serveurs différents, parce que ce sont 2 fonctions différentes.
+
+Les fichiers du site sont à la fois le code du site, qui crée les
+pages affichées, mais également les médias incorporés dans les pages.
+
+Ainsi lors de la création d'une page avec une photo, on exécute le
+fichier de création de page (PHP), pour ajouter l'article en base de
+donnée, mais également la photo dans les fichiers du site.
+
+Lors du déplacement d'un site, il faut donc sauvegarder et migrer les
+fichiers du site ET le contenu de la base de données.
+
+* Faire la sauvegarde du Wordpress source
+
+Pour la sauvegarde des sites, j'utilise
+[[https://wordpress.org/plugins/backupwordpress/][backupwordpress]]
+depuis des années.
+Il faut installer le plugin depuis l'interface d'administration, dans
+=Outils > Sauvegarde=.
+
+La 1ère chose est de faire une sauvegarde complète (sur =ancien.fr=).
+Cela prend 5-10 minutes, et vous donne un fichier .zip qui contient un
+dossier avec *les fichiers* et une sauvegarde de la *base de donnée*
+dedans (c'est le fichier .sql).
+
+* Décompressez le .zip quelque part en local
+
+Le .zip que vous venez des récupérer contient :
+- les fichiers du wordpress
+- un dump de la base de données (c'est le fichier .sql)
+
+Décompressez le .zip dans un dossier, par exemple =www2=.
+  
+* Créer le Wordpress cible
+
+Si cela est possible, faites installer Wordpress sur sur l'hébergement
+cible (sur =nouveau.fr=).
+Cela permettra d'avoir facilement les informations de *configuration*
+(=wp-config.php=).
+
+Faites également une sauvegarde de l'hébergement cible, au cas où il
+serait utile de repartir de l'état initial.
+
+* Désactiver les fichiers du Wordpress cible
+
+Connectez vous en FTP, SFTP ou SSH. Vous devriez arriver à un dossier
+=www= ou =htdocs=, qui contient les fichiers wordpress qui commencent
+par =wp-=.
+
+Renommez ce dossier =www= en =www-old=, par exemple.
+À partir de ce moment, le site ne fonctionne plus.
+
+Cela veut dire que le site ne va plus lire/écrire dans la base de
+données.
+
+* Migrer la base de donnée
+
+En utilisant un outil, par exemple phpMyAdmin qui est souvent proposé
+avec les hébergements, vous allez restaurer la base de donnée du site
+source vers le site cible.
+
+Pour phpMyAdmin,
+cela se fait en se connectant sur l'interface et,
+*après avoir sélectionné la base de donnée*,
+en utilisant l'onglet Import sur le menu du haut.
+Vous devez voir en haut au milieu
+=Server: [votre serveur].mysql.db >> Database: [votre base]=.
+Si la partie Database manque, cliquez sur Databases en dessous et
+choisissez la base de donnée de votre wordpress.
+
+* Envoyez les fichier sur l'hébergement cible
+
+Avec votre outil FTP/SFTP/SSH, envoyez ce dossier à côté de votre
+dossier =www-old=.
+
+Vous avez donc maintenant =www-old= et =www2= côte-à-côte.
+
+* Le plus délicat : fusionner les configurations
+
+Chaque hébergeur a sa propre façon d'installer ses bases de données,
+et chaque installation de Wordpress génère des clés uniques pour
+sécuriser les données.
+
+Pour la configuration, il faut donc tout d'abord configurer l'ancienne
+installation (celle dans =www2=) pour utiliser la base de données du
+nouvel hébergement.
+
+Dans les 2 dossiers (=www-old= et =www2=), il y a un fichier
+=wp-config.php=.
+La config =www2= provient de l'hébergement source, et =www-old=
+provient de l'hébergement cible.
+
+Faites une copie de =www2/wp-config.php= quelque part, au cas où vous
+vouliez la récupérer, par exemple =www2/wp-config-origin.php=.
+
+Ensuite, vous allez éditer =www2/wp-config.php= pour y mettre les
+informations de base de donnée provenant de =www-old/wp-config.php=.
+
+Le format de configuration est =define(NOM, VALEUR)=, par exemple
+=define('DB_NAME', 'example.com')= pour dire que le nom de la base de
+données est =example.com=.
+
+*Les seules lignes qui doivent être importées* sont celles qui
+commencent par =define('DB_...=.
+
+Toutes les variables =DB_= doivent être prises dans la configuration
+*cible* (=www-old=), c'est-à-dire dans celle du nouvel hébergement.
+En effet, on veut se connecter sur le *nouvel* hébergement, donc il
+faut indiquer le serveur donné dans la nouvelle configuration.
+
+*Attention !* En PHP, un =define('nom', 'valeur')= est définitif, il
+ faut donc *remplacer* les lignes =define('DB_[nom]', '[valeur]')= et
+ non pas simplement ajouter les nouvelles à la suite.
+ Vous pouvez également commenter les lignes avec =//=:
+ : // define('DB_NAME', 'ancien_db');
+ : define('DB_NAME', 'nouveau_db');
+
+Il n'est pas nécessare de modifier les autres lignes.
+En particulier, il ne *faut pas* modifier =$table_prefix = '...';= parce
+qu'il permet d'accéder aux tables (qui ont été créé avec le préfixe de
+chez *ancien*).
+
+* C'est parti pour la publication !
+
+Vous pouvez maintenant renommer =www2= en =www=, puis accéder à votre
+nouveau site sur =nouveau.fr=.
+
+Si tout s'est bien passé, vous verrez une copie conforme de l'ancien
+site.
+
+Si ce n'est pas le cas, voici un peu d'aide :
+- 404 Not Found: le dossier des fichiers n'est pas vu par le
+  serveur.
+  Vérifiez que le dossier a bien été renommé en =www=,
+  sauf s'il s'appelait autrement (il arrive que ce soit =htdocs=)
+- unable to connect to database: impossible de se connecter à la base
+  de donnée. Vérifiez le fichier de configuration, il y a peut-être
+  une ligne mal copiée
+
+* Accès à la configuration du nouveau site
+
+Sur =nouveau.fr=, si vous cliquez sur n'importe quel lien, vous allez
+vous retrouver sur =ancien.fr=, parce que le site est encore configuré
+pour l'ancien nom de domaine.
+
+À cause des redirections automatiques, nous n'arriverez pas à accéder
+à l'administration du site : n'importe quelle tentative vous renverra
+vers =ancien.fr=.
+
+La solution est d'utiliser l'administration de la base de donnée (ex:
+phpMyAdmin) et d'aller dans la table =[prefix]_options=, par exemple
+=wp_options=.
+
+À partir de là, modifiez (Edit) les valeurs de =siteurl= et =home=
+vers la nouvelle adresse.
+
+* Redirection de l'ancien vers le nouveau
+
+Il y a plusieurs possibilités pour rediriger :
+- une page PHP qui redirige toutes les demandes vers le nouveau site
+- une config du serveur web (apache avec mod_rewrite) qui redirige les
+  requêtes
+- l'utilisation d'un système fourni de redirection fourni avec le nom
+  de domaine
+
+J'ai utilisé la dernière solution.
+Le nom de domaine source (=ancien.fr=) fourni un service de
+redirection.
+C'est-à-dire que les requêtes DNS sont envoyées vers un système
+qui redirige vers ce qui a été configuré dans leur interface.
+
+L'avantage, c'est que ça ne dépend que du nom de domaine (pas besoin
+de continuer à payer l'hébergement pour =ancien.fr=).
+
+Il faut cependant choisir correctement la redirection, parce que ça un
+impact sur le référencement.
+Une redirection *temporaire* signale que le site a été déplacé, mais
+qu'en cas de nouvelle requête, il faudrait vérifier si la redirection
+est toujours en place.
+La redirection *permanente* signifie que le déplacement est fait pour
+toujours, et qu'on peut donc considérer que l'ancien site ne reviendra
+plus, *et que toutes les références (index, cache, etc.) peuvent être
+mises à jour définitivement.* Par exemple, google va arrêter de
+chercher à indexer l'ancien site et va proposer le nouveau à la place.
+
+Dans notre cas, c'est bien une redirection permanente qu'il faut
+mettre en place.
