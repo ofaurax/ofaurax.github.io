@@ -98,4 +98,51 @@ a buffer.
 Make search and replace, then `\n` then `C-q` `C-j` (quoted-insert,
 newline)
 
-## next tip
+## Cheatsheet for GNU screen
+
+- Enter the Windowlist with `C-a "`, then:
+  - `m` to sort by most recently used
+  - `,` or `.` to move to upper/lower window
+  - `/` to search by name
+
+## jq basic syntax
+
+js is a JSON greper
+
+- `cat data.json | jq '.[] | select(.id == "MY_ID")'` to get the
+  element with ID "MY_ID" in the data array
+- `cat data.json | jq '.results[] | {name, age}'` to keep only
+  name/age fields
+
+## Make space in journalctl logs
+
+Retain only the past two days: `journalctl --vacuum-time=2d`
+
+Retain only the past 500 MB: `journalctl --vacuum-size=500M`
+
+http://unix.stackexchange.com/questions/139513/ddg#194058
+
+## Emacs: unbreakable space
+
+`C-x 8 SPC`
+
+## Check password strength
+
+`echo "password" | cracklib-check`
+
+## sh: read input
+
+To set `$PASS` with user input: `read PASS`
+
+The entered value will be visible on the screen but not in the
+history.
+
+`read -s PASS` disables the output on screen
+
+## bash: for loops
+
+Iterate on current dir files: `for f in * ; do echo $f ; done`
+
+Iterate on an integer sequence:
+`for i in $(seq 1 5) ; do echo $i ; done`
+
