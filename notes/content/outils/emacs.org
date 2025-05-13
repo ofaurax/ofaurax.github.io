@@ -1,0 +1,40 @@
+#+TITLE: Emacs
+#+DATE: 2025-01-31T15:24:08+01:00
+
+Emacs est mon éditeur de texte préféré, et j'apprécie qu'il soit à la
+fois cohérent, stable et extensible.
+
+* Communauté Emacs
+
+- https://emacs.stackexchange.com/
+- https://emacs.stackexchange.com/questions/2571/what-emacs-communities-exist
+- Emacs wiki, en français! https://www.emacswiki.org/emacs/PlanDuSite
+
+* Gestion de projet avec Emacs
+
+Je suis en train de creuser le sujet:
+- https://www.emacswiki.org/emacs/CategoryProject
+- https://www.emacswiki.org/emacs/Projectile
+- https://wikemacs.org/wiki/Projectile
+- https://projectile.mx/
+
+* Ma config
+
+Pour l'instant, j'ai un =.emacs= très basique:
+- configure MELPA comme source de packages
+- active =php-mode= pour les fichiers =.php= et =.inc=
+
+Bientôt, ajouter par défaut =ido-mode= et =display-line-numbers-mode=.
+  
+* Ressources à creuser
+
+Un podcast sur Emacs, terminé depuis un moment, mais avec des liens
+utiles vers plein de (bonnes) choses.
+Peut-être du contenu à recycler: https://emacscast.org/
+
+* Site web avec org-mode + hugo
+
+Le site que vous voyez est rédigé en org-mode et généré par
+[[https://gohugo.io/][hugo]], un générateur de site statique.
+
+
