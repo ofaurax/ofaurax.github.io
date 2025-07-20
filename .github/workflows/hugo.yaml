@@ -32,6 +32,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
+      # renovate: datasource=github-releases depName=hugo packageName=gohugoio/hugo
       HUGO_VERSION: 0.128.0
       SITE_DIR: notes
     steps:
