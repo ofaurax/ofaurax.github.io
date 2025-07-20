@@ -6,7 +6,7 @@
     "customManagers": [
         {
             "customType": "regex",
-            "managerFilePatterns": ["hugo.yaml", ".github/workflows/hugo.yaml"],
+            "managerFilePatterns": [".github/workflows/hugo.yaml"],
             "matchStrings": [
                 "# renovate: datasource=(?<datasource>[a-z-]+?)(?: depName=(?<depName>.+?))? packageName=(?<packageName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s+ .+?_VERSION: (?<currentValue>.+?)\\s"
             ]
